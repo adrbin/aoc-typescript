@@ -1,0 +1,23 @@
+{
+  "name": "aoc-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrbin/aoc-typescript.git"
+  },
+  "author": "adrbin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/adrbin/aoc-typescript/issues"
+  },
+  "homepage": "https://github.com/adrbin/aoc-typescript#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  }
+}
