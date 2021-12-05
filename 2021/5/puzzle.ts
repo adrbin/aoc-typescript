@@ -36,11 +36,7 @@ class Board {
       return;
     }
 
-    if (x1 > x2) {
-      [x1, y1, x2, y2] = [x2, y2, x1, y1];
-    }
-
-    if (x2 - x1 === Math.abs(y2 - y1)) {
+    if (Math.abs(x2 - x1) === Math.abs(y2 - y1)) {
       this.#drawDiagonalLine(x1, y1, x2, y2);
       return;
     }
@@ -56,10 +52,7 @@ class Board {
     }
     for (let i = y1; i <= y2; i++) {
       const address = `${x},${i}`;
-      let count = this.board.get(address);
-      if (count === undefined) {
-        count = 0;
-      }
+      let count = this.board.get(address) ?? 0;
       this.board.set(address, count + 1);
     }
   }
@@ -70,23 +63,21 @@ class Board {
     }
     for (let i = x1; i <= x2; i++) {
       const address = `${i},${y}`;
-      let count = this.board.get(address);
-      if (count === undefined) {
-        count = 0;
-      }
+      let count = this.board.get(address) ?? 0;
       this.board.set(address, count + 1);
     }
   }
 
   #drawDiagonalLine(x1: number, y1: number, x2: number, y2: number) {
+    if (x1 > x2) {
+      [x1, y1, x2, y2] = [x2, y2, x1, y1];
+    }
+
     const sign = y1 < y2 ? 1 : -1;
 
     for (let i = 0; i <= x2 - x1; i++) {
       const address = `${x1 + i},${y1 + i * sign}`;
-      let count = this.board.get(address);
-      if (count === undefined) {
-        count = 0;
-      }
+      let count = this.board.get(address) ?? 0;
       this.board.set(address, count + 1);
     }
   }

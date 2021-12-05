@@ -34,10 +34,7 @@ class Board {
         if (!shouldconsiderDiagonals) {
             return;
         }
-        if (x1 > x2) {
-            [x1, y1, x2, y2] = [x2, y2, x1, y1];
-        }
-        if (x2 - x1 === Math.abs(y2 - y1)) {
+        if (Math.abs(x2 - x1) === Math.abs(y2 - y1)) {
             __classPrivateFieldGet(this, _Board_instances, "m", _Board_drawDiagonalLine).call(this, x1, y1, x2, y2);
             return;
         }
@@ -45,37 +42,34 @@ class Board {
     }
 }
 _Board_instances = new WeakSet(), _Board_drawVerticalLine = function _Board_drawVerticalLine(x, y1, y2) {
+    var _a;
     if (y1 > y2) {
         [y1, y2] = [y2, y1];
     }
     for (let i = y1; i <= y2; i++) {
         const address = `${x},${i}`;
-        let count = this.board.get(address);
-        if (count === undefined) {
-            count = 0;
-        }
+        let count = (_a = this.board.get(address)) !== null && _a !== void 0 ? _a : 0;
         this.board.set(address, count + 1);
     }
 }, _Board_drawHorizontalLine = function _Board_drawHorizontalLine(x1, x2, y) {
+    var _a;
     if (x1 > x2) {
         [x1, x2] = [x2, x1];
     }
     for (let i = x1; i <= x2; i++) {
         const address = `${i},${y}`;
-        let count = this.board.get(address);
-        if (count === undefined) {
-            count = 0;
-        }
+        let count = (_a = this.board.get(address)) !== null && _a !== void 0 ? _a : 0;
         this.board.set(address, count + 1);
     }
 }, _Board_drawDiagonalLine = function _Board_drawDiagonalLine(x1, y1, x2, y2) {
+    var _a;
+    if (x1 > x2) {
+        [x1, y1, x2, y2] = [x2, y2, x1, y1];
+    }
     const sign = y1 < y2 ? 1 : -1;
     for (let i = 0; i <= x2 - x1; i++) {
         const address = `${x1 + i},${y1 + i * sign}`;
-        let count = this.board.get(address);
-        if (count === undefined) {
-            count = 0;
-        }
+        let count = (_a = this.board.get(address)) !== null && _a !== void 0 ? _a : 0;
         this.board.set(address, count + 1);
     }
 };
