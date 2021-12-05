@@ -44,7 +44,10 @@ class Board {
       this.#drawDiagonalLine(x1, y1, x2, y2);
       return;
     }
-    1 == 1;
+
+    throw new Error(
+      `Incorrect line type with x1 = ${x1}, y1 = ${y1}, x2 = ${x2}, y2 = ${y2}`,
+    );
   }
 
   #drawVerticalLine(x: number, y1: number, y2: number) {

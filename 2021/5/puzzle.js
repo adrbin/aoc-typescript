@@ -41,7 +41,7 @@ class Board {
             __classPrivateFieldGet(this, _Board_instances, "m", _Board_drawDiagonalLine).call(this, x1, y1, x2, y2);
             return;
         }
-        1 == 1;
+        throw new Error(`Incorrect line type with x1 = ${x1}, y1 = ${y1}, x2 = ${x2}, y2 = ${y2}`);
     }
 }
 _Board_instances = new WeakSet(), _Board_drawVerticalLine = function _Board_drawVerticalLine(x, y1, y2) {
