@@ -8,26 +8,15 @@ function part2(input) {
     return simulateFishes(input, 256);
 }
 function simulateFishes(input, stepCount) {
-    var _a;
+    var _a, _b, _c;
     let fishes = [];
     for (const state of input.map(x => parseInt(x))) {
-        const count = (_a = fishes[state]) !== null && _a !== void 0 ? _a : 0;
-        fishes[state] = count + 1;
+        fishes[state] = ((_a = fishes[state]) !== null && _a !== void 0 ? _a : 0) + 1;
     }
     for (let i = 0; i < stepCount; i++) {
-        const newFishes = [];
-        fishes.forEach((count, state) => {
-            var _a, _b;
-            if (state === 0) {
-                const existingCount = (_a = newFishes[6]) !== null && _a !== void 0 ? _a : 0;
-                newFishes[6] = existingCount + count;
-                newFishes[8] = count;
-                return;
-            }
-            const existingCount = (_b = newFishes[state - 1]) !== null && _b !== void 0 ? _b : 0;
-            newFishes[state - 1] = existingCount + count;
-        });
-        fishes = newFishes;
+        const breedingFishesCount = (_b = fishes.shift()) !== null && _b !== void 0 ? _b : 0;
+        fishes[6] = ((_c = fishes[6]) !== null && _c !== void 0 ? _c : 0) + breedingFishesCount;
+        fishes[8] = breedingFishesCount;
     }
     return fishes.reduce((acc, cur) => acc + cur);
 }
