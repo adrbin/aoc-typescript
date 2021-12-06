@@ -1,45 +1,38 @@
 import { runPuzzles } from '../../utils.js';
 
 function part1(input: string[]) {
-  const fishes = input.map(x => new Fish(parseInt(x)));
-  for (let i = 0; i < 80; i++) {
-    for (const fish of [...fishes]) {
-      if (fish.step()) {
-        fishes.push(new Fish(8));
-      }
-    }
-  }
-  return fishes.length;
-}
-
-class Fish {
-  timer: number;
-
-  constructor(timer: number) {
-    this.timer = timer;
-  }
-
-  step() {
-    if (this.timer === 0) {
-      this.timer = 6;
-      return true;
-    }
-
-    this.timer--;
-    return false;
-  }
+  return simulateFishes(input, 80);
 }
 
 function part2(input: string[]) {
-  const fishes = input.map(x => new Fish(parseInt(x)));
-  for (let i = 0; i < 256; i++) {
-    for (const fish of [...fishes]) {
-      if (fish.step()) {
-        fishes.push(new Fish(8));
-      }
-    }
+  return simulateFishes(input, 256);
+}
+
+function simulateFishes(input: string[], stepCount: number) {
+  let fishes = new Map<number, number>();
+  for (const state of input.map(x => parseInt(x))) {
+    const count = fishes.get(state) ?? 0;
+    fishes.set(state, count + 1);
   }
-  return fishes.length;
+
+  for (let i = 0; i < stepCount; i++) {
+    const newFishes = new Map<number, number>();
+    for (const [state, count] of fishes) {
+      if (state === 0) {
+        const existingCount = newFishes.get(6) ?? 0;
+        newFishes.set(6, existingCount + count);
+        newFishes.set(8, count);
+        continue;
+      }
+
+      const existingCount = newFishes.get(state - 1) ?? 0;
+      newFishes.set(state - 1, existingCount + count);
+    }
+
+    fishes = newFishes;
+  }
+
+  return [...fishes.values()].reduce((acc, cur) => acc + cur);
 }
 
 runPuzzles(part1, part2, 2021, 6, ',');

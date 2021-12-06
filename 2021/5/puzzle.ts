@@ -12,6 +12,18 @@ function part1(input: string[]) {
   return [...board.board.values()].filter(x => x > 1).length;
 }
 
+function part2(input: string[]) {
+  const board = new Board();
+  for (const line of input) {
+    const [point1, point2] = line.split('->').map(x => x.trim());
+    const [x1, y1] = point1.split(',').map(x => parseInt(x));
+    const [x2, y2] = point2.split(',').map(x => parseInt(x));
+    board.drawLine(x1, y1, x2, y2, true);
+  }
+
+  return [...board.board.values()].filter(x => x > 1).length;
+}
+
 class Board {
   board = new Map<string, number>();
 
@@ -81,18 +93,6 @@ class Board {
       this.board.set(address, count + 1);
     }
   }
-}
-
-function part2(input: string[]) {
-  const board = new Board();
-  for (const line of input) {
-    const [point1, point2] = line.split('->').map(x => x.trim());
-    const [x1, y1] = point1.split(',').map(x => parseInt(x));
-    const [x2, y2] = point2.split(',').map(x => parseInt(x));
-    board.drawLine(x1, y1, x2, y2, true);
-  }
-
-  return [...board.board.values()].filter(x => x > 1).length;
 }
 
 runPuzzles(part1, part2, 2021, 5);
