@@ -8,24 +8,25 @@ function part2(input) {
     return simulateFishes(input, 256);
 }
 function simulateFishes(input, stepCount) {
-    var _a, _b, _c;
-    let fishes = new Map();
+    var _a;
+    let fishes = [];
     for (const state of input.map(x => parseInt(x))) {
-        const count = (_a = fishes.get(state)) !== null && _a !== void 0 ? _a : 0;
-        fishes.set(state, count + 1);
+        const count = (_a = fishes[state]) !== null && _a !== void 0 ? _a : 0;
+        fishes[state] = count + 1;
     }
     for (let i = 0; i < stepCount; i++) {
-        const newFishes = new Map();
-        for (const [state, count] of fishes) {
+        const newFishes = [];
+        fishes.forEach((count, state) => {
+            var _a, _b;
             if (state === 0) {
-                const existingCount = (_b = newFishes.get(6)) !== null && _b !== void 0 ? _b : 0;
-                newFishes.set(6, existingCount + count);
-                newFishes.set(8, count);
-                continue;
+                const existingCount = (_a = newFishes[6]) !== null && _a !== void 0 ? _a : 0;
+                newFishes[6] = existingCount + count;
+                newFishes[8] = count;
+                return;
             }
-            const existingCount = (_c = newFishes.get(state - 1)) !== null && _c !== void 0 ? _c : 0;
-            newFishes.set(state - 1, existingCount + count);
-        }
+            const existingCount = (_b = newFishes[state - 1]) !== null && _b !== void 0 ? _b : 0;
+            newFishes[state - 1] = existingCount + count;
+        });
         fishes = newFishes;
     }
     return [...fishes.values()].reduce((acc, cur) => acc + cur);
