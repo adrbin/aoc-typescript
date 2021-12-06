@@ -32,7 +32,7 @@ function simulateFishes(input: string[], stepCount: number) {
     fishes = newFishes;
   }
 
-  return [...fishes.values()].reduce((acc, cur) => acc + cur);
+  return fishes.reduce((acc, cur) => acc + cur);
 }
 
 runPuzzles(part1, part2, 2021, 6, ',');

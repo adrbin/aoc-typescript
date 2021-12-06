@@ -29,7 +29,7 @@ function simulateFishes(input, stepCount) {
         });
         fishes = newFishes;
     }
-    return [...fishes.values()].reduce((acc, cur) => acc + cur);
+    return fishes.reduce((acc, cur) => acc + cur);
 }
 (0, utils_js_1.runPuzzles)(part1, part2, 2021, 6, ',');
 //# sourceMappingURL=puzzle.js.map
