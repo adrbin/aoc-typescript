@@ -18,7 +18,7 @@ function simulateFishes(input, stepCount) {
         fishes[6] = ((_c = fishes[6]) !== null && _c !== void 0 ? _c : 0) + breedingFishesCount;
         fishes[8] = breedingFishesCount;
     }
-    return fishes.reduce((acc, cur) => acc + cur);
+    return fishes.reduce((acc, cur) => acc + cur, 0);
 }
 (0, utils_js_1.runPuzzles)(part1, part2, 2021, 6, ',');
 //# sourceMappingURL=puzzle.js.map

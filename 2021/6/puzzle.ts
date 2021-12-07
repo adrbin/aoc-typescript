@@ -20,7 +20,7 @@ function simulateFishes(input: string[], stepCount: number) {
     fishes[8] = breedingFishesCount;
   }
 
-  return fishes.reduce((acc, cur) => acc + cur);
+  return fishes.reduce((acc, cur) => acc + cur, 0);
 }
 
 runPuzzles(part1, part2, 2021, 6, ',');
