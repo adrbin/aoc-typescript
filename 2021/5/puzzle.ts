@@ -32,7 +32,7 @@ class Board {
     y1: number,
     x2: number,
     y2: number,
-    shouldconsiderDiagonals = true,
+    shouldConsiderDiagonals = true,
   ) {
     if (x1 === x2) {
       this.#drawVerticalLine(x1, y1, y2);
@@ -44,7 +44,7 @@ class Board {
       return;
     }
 
-    if (!shouldconsiderDiagonals) {
+    if (!shouldConsiderDiagonals) {
       return;
     }
 

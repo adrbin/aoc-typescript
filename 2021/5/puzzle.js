@@ -32,7 +32,7 @@ class Board {
         _Board_instances.add(this);
         this.board = new Map();
     }
-    drawLine(x1, y1, x2, y2, shouldconsiderDiagonals = true) {
+    drawLine(x1, y1, x2, y2, shouldConsiderDiagonals = true) {
         if (x1 === x2) {
             __classPrivateFieldGet(this, _Board_instances, "m", _Board_drawVerticalLine).call(this, x1, y1, y2);
             return;
@@ -41,7 +41,7 @@ class Board {
             __classPrivateFieldGet(this, _Board_instances, "m", _Board_drawHorizontalLine).call(this, x1, x2, y1);
             return;
         }
-        if (!shouldconsiderDiagonals) {
+        if (!shouldConsiderDiagonals) {
             return;
         }
         if (Math.abs(x2 - x1) === Math.abs(y2 - y1)) {
