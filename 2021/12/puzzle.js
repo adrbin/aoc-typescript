@@ -44,8 +44,7 @@ function countPaths(graph, considerDoubleSmallCave = false) {
             (considerDoubleSmallCave &&
                 nextNode !== 'start' &&
                 !hasDoubleSmallCave)).forEach(nextNode => traverseGraph([...visited, nextNode], hasDoubleSmallCave ||
-            (nextNode === nextNode.toLowerCase() &&
-                visited.filter(v => v === nextNode).length > 0)));
+            (nextNode === nextNode.toLowerCase() && visited.includes(nextNode))));
     }
     traverseGraph(['start']);
     return count;

@@ -59,8 +59,7 @@ function countPaths(
         traverseGraph(
           [...visited, nextNode],
           hasDoubleSmallCave ||
-            (nextNode === nextNode.toLowerCase() &&
-              visited.filter(v => v === nextNode).length > 0),
+            (nextNode === nextNode.toLowerCase() && visited.includes(nextNode)),
         ),
       );
   }
