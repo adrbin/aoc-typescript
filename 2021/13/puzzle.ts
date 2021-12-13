@@ -1,4 +1,3 @@
-import { stdout } from 'process';
 import { runPuzzles } from '../../utils.js';
 
 const foldAlongText = 'fold along ';
