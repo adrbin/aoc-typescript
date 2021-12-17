@@ -12,7 +12,7 @@ function part1(input) {
     for (let initialY = 0; initialY < 100; initialY++) {
         for (let initialX = initialMinX; initialX <= initialMaxX; initialX++) {
             let y = initialY * initialX - (initialX * (initialX - 1)) / 2, dy = initialY - initialX;
-            for (let i = 0; y >= targetYMin; i++) {
+            while (y >= targetYMin) {
                 y += dy--;
                 if (y >= targetYMin && y <= targetYMax) {
                     const localMaxY = initialY * initialY - (initialY * (initialY - 1)) / 2;
