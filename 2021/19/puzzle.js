@@ -88,25 +88,19 @@ function generateRelativePositions(rotatedScanners) {
     return rotatedScanners.map(rotations => rotations.map(rotation => calculateRelativePositions(rotation)));
 }
 function locateScanners(rotatedScanners, relativeRotatedScanners) {
-    // const locatedBeacons = [rotatedScanners[0][0]];
     const locatedBeacons = rotatedScanners[0][0];
     const locatedScanners = ['0,0,0'];
     rotatedScanners = rotatedScanners.slice(1);
     relativeRotatedScanners = relativeRotatedScanners.slice(1);
     loop: while (relativeRotatedScanners.length > 0) {
-        // const relativeLocatedBeacons = locatedBeacons.map(
-        //   calculateRelativePositions,
-        // );
         const relativeLocatedBeacons = calculateRelativePositions(locatedBeacons);
         for (let i = 0; i < relativeRotatedScanners.length; i++) {
             for (let j = 0; j < relativeRotatedScanners[i].length; j++) {
                 for (let k = 0; k < relativeRotatedScanners[i][j].length; k++) {
                     for (let l = 0; l < relativeLocatedBeacons.length; l++) {
-                        // for (let m = 0; m < relativeLocatedBeacons[l].length; m++) {
                         let matchCount = 0;
                         for (const position of relativeRotatedScanners[i][j][k]) {
-                            if (relativeLocatedBeacons[l] /*[m]*/
-                                .has(position)) {
+                            if (relativeLocatedBeacons[l].has(position)) {
                                 matchCount++;
                             }
                         }
@@ -114,9 +108,6 @@ function locateScanners(rotatedScanners, relativeRotatedScanners) {
                             const beaconPosition = rotatedScanners[i][j][k]
                                 .split(',')
                                 .map(Number);
-                            // const matchingPosition = locatedBeacons[l][m]
-                            //   .split(',')
-                            //   .map(Number);
                             const matchingPosition = locatedBeacons[l].split(',').map(Number);
                             const alignedScannerPosition = beaconPosition.map((beaconCoord, index) => matchingPosition[index] - beaconCoord);
                             locatedScanners.push(alignedScannerPosition.join(','));
@@ -125,7 +116,6 @@ function locateScanners(rotatedScanners, relativeRotatedScanners) {
                                 .map(Number)
                                 .map((coord, index) => coord + alignedScannerPosition[index])
                                 .join(','));
-                            // locatedBeacons.push(mappedBeacons);
                             for (const beacon of mappedBeacons) {
                                 if (!locatedBeacons.includes(beacon)) {
                                     locatedBeacons.push(beacon);
@@ -136,7 +126,6 @@ function locateScanners(rotatedScanners, relativeRotatedScanners) {
                             continue loop;
                         }
                     }
-                    // }
                 }
             }
         }
@@ -148,7 +137,7 @@ function calculateRelativePositions(positions) {
         const position1Array = position1.split(',').map(Number);
         const position2Array = position2.split(',').map(Number);
         return position1Array
-            .map((coord1, i) => position2Array[i] - coord1)
+            .map((_, i) => position2Array[i] - position1Array[i])
             .join(',');
     })));
 }
@@ -161,7 +150,7 @@ function part2(input) {
         const position1 = scanner1.split(',').map(Number);
         return locatedScanners.map(scanner2 => {
             const position2 = scanner2.split(',').map(Number);
-            return position1.reduce((acc, _, index) => acc + Math.abs(position1[index] - position2[index]), 0);
+            return position1.reduce((acc, _, i) => acc + Math.abs(position1[i] - position2[i]), 0);
         });
     });
     return Math.max(...distances);
