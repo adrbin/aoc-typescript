@@ -39,7 +39,6 @@ function parseImage(input: string[]): ImageInput {
 function enhanceImage({ image, enhancementAlgorithm }: ImageInput, i: number) {
   const newImage = new Map<string, number>();
   for (const [pixel, _] of image) {
-    // if (image.get(pixel) === 0) continue;
     for (const [dy, dx] of adjacentVectors) {
       const [y, x] = pixel.split(',').map(Number);
       const [newY, newX] = [y + dy, x + dx];
@@ -70,15 +69,6 @@ function calculatePixelValue(
 ) {
   const defaultValue = i % 2 === 1 ? 1 : 0;
   return image.get(`${y},${x}`) ?? defaultValue;
-  // const isEmpty = adjacentVectors.every(
-  //   ([dy, dx]) => image.get(`${y + dy},${x + dx}`) !== 1,
-  // );
-
-  // if (i % 2 === 1 && isEmpty) {
-  //   return 1;
-  // }
-
-  // return image.get(`${y},${x}`) ?? 0;
 }
 
 function part2(input: string[]) {
